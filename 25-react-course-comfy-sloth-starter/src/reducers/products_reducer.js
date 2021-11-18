@@ -8,6 +8,7 @@ import {
   GET_SINGLE_PRODUCT_SUCCESS,
   GET_SINGLE_PRODUCT_ERROR,
 } from '../actions'
+import { products_url } from '../utils/constants'
 
 const products_reducer = (state, action) => {
   if (action.type === SIDEBAR_OPEN) {
@@ -16,7 +17,23 @@ const products_reducer = (state, action) => {
   if (action.type === SIDEBAR_CLOSE) {
     return { ...state, isSidebarOpen: false }
   }
-
+  if (action.type === GET_PRODUCTS_BEGIN) {
+    return { ...state, products_loading: true }
+  }
+  if (action.type === GET_PRODUCTS_SUCCESS) {
+    const featured_products = action.payload.filter(
+      (product) => product.featured === true
+    )
+    return {
+      ...state,
+      products_loading: false,
+      prodcuts: action.payload,
+      featured_products,
+    }
+  }
+  if (action.type === GET_PRODUCTS_ERROR) {
+    return { ...state, product_loading: false, products_error: true }
+  }
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }
