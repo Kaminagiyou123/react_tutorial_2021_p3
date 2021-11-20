@@ -36,7 +36,6 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const fetchProducts = async (url) => {
-    const response = await axios.get(url)
     try {
       dispatch({ type: GET_PRODUCTS_BEGIN })
       const response = await axios.get(url)
@@ -56,6 +55,7 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR })
     }
   }
+
   useEffect(() => {
     fetchProducts(url)
   }, [])
