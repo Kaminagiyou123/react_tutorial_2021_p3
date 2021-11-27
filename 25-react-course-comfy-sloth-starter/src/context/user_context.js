@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { GiConsoleController } from 'react-icons/gi'
+// import { GiConsoleController } from 'react-icons/gi'
 
 const UserContext = React.createContext()
 export const UserProvider = ({ children }) => {
-  const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
-    useAuth0()
+  const { loginWithRedirect, logout, user, isLoading } = useAuth0()
 
   const [myUser, setMyUser] = useState(null)
 
